@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {fetchAllAdverts} from '../actions/adverts'
+import {Link} from 'react-router-dom'
 
 class AdvertsList extends PureComponent {
 
@@ -26,7 +27,7 @@ class AdvertsList extends PureComponent {
           <tbody>
             { adverts.map(advert => (<tr key={advert.id}>
               <td>{advert.id}</td>
-              <td>{advert.title}</td>
+              <td><Link to={ `/adverts/${advert.id}` }>{advert.title}</Link></td>
               <td>&euro; {advert.price}.00</td>
             </tr>)) }
           </tbody>

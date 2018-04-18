@@ -6,13 +6,20 @@ export const FETCHED_DETAILED_ADVERT = 'FETCHED_DETAILED_ADVERT'
 export const FETCHED_ALL_ADVERTS = 'FETCHED_ALL_ADVERTS'
 
 export const fetchAdvert = (advertId) => (dispatch) => {
+  console.log(advertId)
   request
     .get(`${baseUrl}/adverts/${advertId}`)
-    .then(response => dispatch({
-      type: FETCHED_DETAILED_ADVERT,
-      payload: response.body.advert
-    }))
-    .catch(err => alert(err))
+    .then(response => {
+      console.log("in the response")
+      dispatch({
+        type: FETCHED_DETAILED_ADVERT,
+        payload: response.body
+      })
+    })
+    .catch(err => {
+      console.log("in the catch")
+      alert(err)}
+    )
 }
 
 export const fetchAllAdverts = () => (dispatch) => {

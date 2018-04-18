@@ -2,13 +2,13 @@ import React, {PureComponent} from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { fetchAdvert } from '../actions/adverts'
+import {Link} from 'react-router-dom'
 
 class AdvertDetails extends PureComponent {
 
   componentWillMount(props) {
-    const {advert} = this.props
-    if (!advert) return null
-    else this.props.fetchAdvert(this.props.match.params.id)
+    console.log(this.props.match.params.id)
+    this.props.fetchAdvert(this.props.match.params.id)
   }
 
   render() {
@@ -17,7 +17,7 @@ class AdvertDetails extends PureComponent {
 
     return (
       <div>
-        <h1>{ advert }</h1>
+        <h1>{ advert.title }</h1>
       </div>
     )
   }
