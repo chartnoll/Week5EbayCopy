@@ -1,13 +1,18 @@
 import React, {PureComponent} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {fetchAllAdverts} from '../actions/adverts'
+import {fetchAllAdverts, createAdvert} from '../actions/adverts'
 import {Link} from 'react-router-dom'
+import AdvertForm from './AdvertForm'
 
 class AdvertsList extends PureComponent {
 
   componentWillMount() {
     this.props.fetchAllAdverts()
+  }
+
+  createAdvert = (advert) => {
+    this.props.createAdvert(advert)
   }
 
   render() {
@@ -32,6 +37,8 @@ class AdvertsList extends PureComponent {
             </tr>)) }
           </tbody>
 				</table>
+        <h1>Create a new advert</h1>
+        <AdvertForm onSubmit={this.createAdvert} />
       </div>
     )
   }
@@ -44,4 +51,7 @@ const mapStateToProps = function (state) {
 }
 
 
-export default connect(mapStateToProps, { fetchAllAdverts })(AdvertsList)
+export default connect(mapStateToProps, {
+  fetchAllAdverts,
+  createAdvert
+ })(AdvertsList)

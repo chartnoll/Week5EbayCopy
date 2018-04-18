@@ -4,6 +4,7 @@ const baseUrl = 'http://localhost:4000'
 
 export const FETCHED_DETAILED_ADVERT = 'FETCHED_DETAILED_ADVERT'
 export const FETCHED_ALL_ADVERTS = 'FETCHED_ALL_ADVERTS'
+export const ADD_ADVERT = 'ADD_ADVERT'
 
 export const fetchAdvert = (advertId) => (dispatch) => {
   console.log(advertId)
@@ -30,4 +31,14 @@ export const fetchAllAdverts = () => (dispatch) => {
       payload: response.body.advert
     }))
     .catch(err => alert(err))
+}
+
+export const createAdvert = (advert) => (dispatch) => {
+  request
+    .post(`${baseUrl}/adverts`)
+    .send(advert)
+    .then(response => dispatch({
+      type: ADD_ADVERT,
+      payload: response.body
+    }))
 }
