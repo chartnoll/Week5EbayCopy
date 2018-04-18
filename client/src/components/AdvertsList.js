@@ -1,13 +1,12 @@
 import React, {PureComponent} from 'react'
 import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
+import {fetchAllAdverts} from '../actions/adverts'
 
 class AdvertsList extends PureComponent {
-  static propTypes = {
-    adverts: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired
-    })).isRequired
+
+  componentWillMount() {
+    this.props.fetchAllAdverts()
   }
 
   render() {
@@ -27,7 +26,7 @@ class AdvertsList extends PureComponent {
           <tbody>
             { adverts.map(advert => (<tr key={advert.id}>
               <td>{advert.id}</td>
-              <td>{advert.name}</td>
+              <td>{advert.title}</td>
               <td>&euro; {advert.price}.00</td>
             </tr>)) }
           </tbody>
@@ -37,4 +36,11 @@ class AdvertsList extends PureComponent {
   }
 }
 
-export default AdvertsList
+const mapStateToProps = function (state) {
+  return {
+    adverts: state.adverts
+  }
+}
+
+
+export default connect(mapStateToProps, { fetchAllAdverts })(AdvertsList)

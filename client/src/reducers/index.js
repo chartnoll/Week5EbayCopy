@@ -1,2 +1,9 @@
 // reducers/index.js
-export default {}
+import adverts from './adverts'
+import advert from './advert'
+
+
+export default {
+  adverts,
+  advert
+}
